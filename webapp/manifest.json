@@ -1,0 +1,186 @@
+{
+  "_version": "1.28.0",
+  "sap.app": {
+    "id": "com.ibm.zfeovp07",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:ovp",
+      "version": "1.11.5",
+      "toolsId": "3d07c6c3-485c-4d3e-aa93-1b1b72496f8b"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZFE_OVP_SOH_CDS/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZFE_OVP_SOH_CDS_VAN",
+            "annotation"
+          ],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZFE_OVP_SOH_CDS_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZFE_OVP_SOH_CDS_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/ZFE_OVP_SOH_CDS_VAN.xml"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.84.20",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.f": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ovp": {},
+        "sap.ui.rta": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.ibm.zfeovp07.i18n.i18n"
+        }
+      },
+      "mainModel": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false,
+          "metadataUrlParams": {
+            "sap-value-list": "none"
+          }
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [],
+      "targets": {}
+    }
+  },
+  "sap.ovp": {
+    "globalFilterModel": "mainModel",
+    "globalFilterEntityType": "ZFE_OVP_SOHType",
+    "containerLayout": "resizable",
+    "enableLiveFilter": true,
+    "considerAnalyticalParameters": false,
+    "cards": {
+      "REPLACE_WITH_CARD_ID": {
+      "model": "mainModel",
+      "template": "sap.ovp.cards.table",
+      "settings": {
+          "title": "chart",
+          "entitySet": "ZFE_OVP_SOH",
+          "sortOrder": "descending",
+          "sortBy": "vbeln",
+          "annotationPath": "com.sap.vocabularies.UI.v1.LineItem",
+          "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint",
+          "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant",
+          "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification"
+      }
+    },
+    "card01": {
+      "model": "mainModel",
+      "template": "sap.ovp.cards.list",
+      "settings": {
+          "title": "card01",
+          "entitySet": "ZFE_OVP_SOH",
+          "listType": "condensed",
+          "listFlavor": "bar",
+          "sortOrder": "descending",
+          "sortBy": "vbeln",
+          "annotationPath": "com.sap.vocabularies.UI.v1.LineItem",
+          "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint",
+          "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant",
+          "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification"
+          }
+      },"card02": {
+        "model": "mainModel",
+        "template": "sap.ovp.cards.stack",
+        "settings": {
+            "title": "card02",
+            "entitySet": "ZFE_OVP_SOH",
+            "subTitle": "stack card",
+            "objectStreamCardsSettings": {
+                "annotationPath": "com.sap.vocabularies.UI.v1.HeaderInfo",
+                "showFirstActionInFooter": false
+            }
+        }
+    },
+    "card03": {
+      "model": "mainModel",
+      "template": "sap.ovp.cards.charts.analytical",
+      "settings": {
+          "title": "card03",
+          "subTitle": "Net Amount",
+          "entitySet": "ZFE_OVP_SOH",
+          "identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification#netAmt",
+          "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#netAmt",
+          "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#ordNetChart"
+      }
+  }
+    
+        }
+      },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "analytical"
+  }
+}
+
